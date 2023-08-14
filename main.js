@@ -11,7 +11,7 @@ function getComputerChoice() {
 function game() {
     let playerWins = 0;
     let computerWins = 0;
-    while (playerWins != 5) {
+    while (playerWins != 5 && computerWins != 5) {
     console.log(playRound(prompt().toLowerCase(), getComputerChoice()));
  
     function playRound(playerSelection, computerSelection) {
@@ -45,6 +45,7 @@ function game() {
 }
 if (playerWins == 5) {
     return "You Win";
+} else if (computerWins == 5) {
+    return "You Lose";
 }
-else return "Lose";
 }
