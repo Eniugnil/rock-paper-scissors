@@ -1,51 +1,93 @@
 function getComputerChoice() {
     let cpuChoice = Math.floor(Math.random() * 3) + 1;
     if (cpuChoice == 1) {
-        return "rock";
+        return 'rock';
     } else if (cpuChoice == 2) {
-        return "paper";
-    } else return "scissors";
+        return 'paper';
+    } else return 'scissors';
 }
 
+//rock
+let rock = document.getElementById('rock');
+rock.addEventListener('click', choseRock);
 
-function game() {
-    let playerWins = 0;
-    let computerWins = 0;
-    while (playerWins != 5 && computerWins != 5) {
-    console.log(playRound(prompt().toLowerCase(), getComputerChoice()));
- 
-    function playRound(playerSelection, computerSelection) {
+function choseRock(e) {
+    playRound('rock', getComputerChoice());
+}
 
-        if (playerSelection === "rock" && computerSelection === "scissors") {
-            playerWins++;
-            return "Rock beats Scissors"}   
+//paper
+let paper = document.getElementById('paper');
+paper.addEventListener('click', chosePaper);
 
-        else if (playerSelection === "rock" && computerSelection === "paper") {
-            computerWins++;
-            return "Rock loses to Paper"}
+function chosePaper(e) {
+    playRound('paper', getComputerChoice());
+}
 
-        else if (playerSelection === "paper" && computerSelection === "rock") {
-            playerWins++;
-            return "Paper beats Rock"}
+//scissors
+let scissors = document.getElementById('scissors');
+scissors.addEventListener('click', choseScissors);
 
-        else if (playerSelection === "paper" && computerSelection === "scissors") {
-            computerWins++;
-            return "Paper loses to Scissors"}
+function choseScissors(e) {
+    playRound('scissors', getComputerChoice());
+}
 
-        else if (playerSelection === "scissors" && computerSelection === "paper") {
-            playerWins++;
-            return "Scissors beats Paper"}
+function playRound(playerSelection, computerSelection) {
 
-        else if (playerSelection === "scissors" && computerSelection === "rock") {
-            computerWins++;
-            return "Scissors loses to Rock"}
+    if (playerSelection === 'rock' && computerSelection === 'scissors') {
+        player.textContent = `Player Score: ${playerWins++}`;
+        roundResults.textContent =  'Rock beats Scissors'}   
 
-        else if (playerSelection === computerSelection) {return "Tie"}
+    else if (playerSelection === 'rock' && computerSelection === 'paper') {
+        computer.textContent = `Computer Score: ${computerWins++}`;
+        roundResults.textContent =  'Rock loses to Paper'}
+
+    else if (playerSelection === 'paper' && computerSelection === 'rock') {
+        player.textContent = `Player Score: ${playerWins++}`;
+        roundResults.textContent =  'Paper beats Rock'}
+
+    else if (playerSelection === 'paper' && computerSelection === 'scissors') {
+        computer.textContent = `Computer Score: ${computerWins++}`;
+        roundResults.textContent =  'Paper loses to Scissors'}
+
+    else if (playerSelection === 'scissors' && computerSelection === 'paper') {
+        player.textContent = `Player Score: ${playerWins++}`;
+        roundResults.textContent =  'Scissors beats Paper'}
+
+    else if (playerSelection === 'scissors' && computerSelection === 'rock') {
+        computer.textContent = `Computer Score: ${computerWins++}`;
+        roundResults.textContent =  'Scissors loses to Rock'}
+
+    else if (playerSelection === computerSelection) {roundResults.textContent =  'Tie'}
+
+    if (playerWins == 5) {
+        gameWinner.textContent = 'Previous Round Winner: You won';
+        playerWins = 0;
+        computerWins = 0;
+
+    } else if (computerWins == 5) {
+        gameWinner.textContent = 'Previous Round Winner: You lost';
+        playerWins = 0;
+        computerWins = 0;
     }
+
 }
-if (playerWins == 5) {
-    return "You Win";
-} else if (computerWins == 5) {
-    return "You Lose";
-}
-}
+
+
+let playerWins = 0;
+let computerWins = 0;
+
+const container = document.querySelector('body')
+const roundResults = document.createElement('div');
+container.appendChild(roundResults);
+
+let player = document.createElement('div');
+player.textContent = `Player Score: ${playerWins}`;
+container.appendChild(player);
+
+let computer = document.createElement('div');
+computer.textContent = `Computer Score: ${computerWins}`;
+container.appendChild(computer);
+
+const gameWinner = document.createElement('div');
+gameWinner.textContent = 'Previous Round Winner: Neither';
+container.appendChild(gameWinner);
